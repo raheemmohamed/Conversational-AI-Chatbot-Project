@@ -15,9 +15,11 @@ This is a full AI conversational Chatbot project developed using varienty of tec
 This repository includes `Admin Dashboard`, `NodejS Backend` and `Multi purpose AI Chatbot UI`. This is a completed project that you can clone and up and run very easily.
 
 Chatbot Trailer
+
 [Conversational AI Chatbot Trailer](https://www.youtube.com/watch?v=XlmvQesRfmc)
 
-Chatbot Overview and How to train embeded model
+Chatbot Overview and How to train embedded model
+
 [Conversational AI Chatbot overview](https://youtu.be/bD7rk2EE7_0?si=013KwvarFufASvd7)
 
 ## Admin Dashboard
