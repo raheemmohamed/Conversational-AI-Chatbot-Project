@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="./src/css/style.css" />
+    <!-- AI-chatbot-style -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      ref="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&display=swap"
+    />
+    <style>
+      .chatbot-header--logo {
+        width: 2.5rem !important;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Placeholder for append ChatBot UI-->
+    <div id="chatbot"></div>
+
+    <script src="./src/js/script.js"></script>
+
+    <script>
+      chatbot.setChatBotConfiguration({
+        apiKey: "", // put here the API key - you will get the key after train embeded model through admin dashboaord
+        // chatbotTitle: "Support Bot",
+        // initialMessage: "Hello! How can i help you?",
+        // brandImage:
+        //   "https://www.kindpng.com/picc/m/171-1712880_head-of-nao-big-nao-robot-clipart-hd.png",
+        // suggestions: [
+        //   "Who is raheem ?",
+        //   "Can i know his skills",
+        //   "where he currently living ?",
+        // ],
+      });
+    </script>
+  </body>
+</html>

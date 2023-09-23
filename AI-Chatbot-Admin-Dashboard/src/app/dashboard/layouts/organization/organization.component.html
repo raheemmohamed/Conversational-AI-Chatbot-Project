@@ -1,0 +1,217 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="flex justify-content-between align-items-center mb-5">
+        <div>
+          <h3 class="m-0">Organizations</h3>
+        </div>
+
+        <button
+          (click)="showAddNewOrganizationModel = true"
+          pButton
+          pRipple
+          type="button"
+          label="Add New Organization"
+          class="p-button-raised"
+        ></button>
+      </div>
+      <div class="mb-5">
+        <p-table
+          [value]="organizationList"
+          scrollDirection="both"
+          [scrollable]="true"
+          scrollHeight="400px"
+          styleClass="mt-3"
+          responsiveLayout="scroll"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th style="width: 200px" pFrozenColumn>Company Name</th>
+              <th style="width: 200px">Id</th>
+              <th style="width: 100px">Website</th>
+              <th style="width: 200px">Company Email</th>
+              <th style="width: 200px">Company Phone No</th>
+              <th style="width: 200px">Active Status</th>
+              <th style="width: 200px">Created At</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-organization>
+            <tr>
+              <td
+                style="width: 200px"
+                pFrozenColumn
+                class="font-bold"
+                [title]="organization.organizationName"
+              >
+                {{ organization.organizationName }}
+
+                <span
+                  class="ml-3 cursor-pointer"
+                  (click)="copyToClipboard(organization.organizationName)"
+                >
+                  <i class="pi pi-copy"></i>
+                </span>
+              </td>
+              <td style="width: 200px" alignFrozen="left">
+                {{ organization._id | truncate : 15 }}
+                <span
+                  class="ml-3 cursor-pointer"
+                  (click)="copyToClipboard(organization._id)"
+                >
+                  <i class="pi pi-copy"></i>
+                </span>
+              </td>
+
+              <td
+                style="width: 200px"
+                [title]="organization.organizationWebsite"
+              >
+                {{ organization.organizationWebsite | truncate : 20 }}
+                <span
+                  class="ml-3 cursor-pointer"
+                  (click)="copyToClipboard(organization.organizationWebsite)"
+                >
+                  <i class="pi pi-copy"></i>
+                </span>
+              </td>
+              <td style="width: 200px" [title]="organization.organizationEmail">
+                {{ organization.organizationEmail | truncate : 10 }}
+                <span
+                  class="ml-3 cursor-pointer"
+                  (click)="copyToClipboard(organization.organizationEmail)"
+                >
+                  <i class="pi pi-copy"></i>
+                </span>
+              </td>
+
+              <td style="width: 200px" [title]="organization.organizationPhone">
+                {{ organization.organizationPhone | truncate : 20 }}
+                <span
+                  class="ml-3 cursor-pointer"
+                  (click)="copyToClipboard(organization.organizationPhone)"
+                >
+                  <i class="pi pi-copy"></i>
+                </span>
+              </td>
+
+              <td style="width: 100px">
+                <ng-container *ngIf="organization.isActive; else showDisbaled">
+                  <p-tag severity="success" value="Active"></p-tag>
+                </ng-container>
+
+                <ng-template #showDisbaled>
+                  <p-tag severity="danger" value="Deactivated"></p-tag>
+                </ng-template>
+              </td>
+
+              <td style="width: 200px" [title]="organization.createdAt">
+                {{ organization.createdAt | truncate : 20 }}
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add new Organization-->
+<p-dialog
+  header="Add New Organization"
+  [(visible)]="showAddNewOrganizationModel"
+  [modal]="true"
+  showEffect="fade"
+  [style]="{ width: '40vw' }"
+  [breakpoints]="{ '960px': '75vw' }"
+  styleClass="pb-0"
+>
+  <div class="grid">
+    <div class="col-12 md:col-12">
+      <form
+        [formGroup]="addNewOrganizationForm"
+        (ngSubmit)="saveOrganizationForm()"
+      >
+        <div class="p-fluid">
+          <div class="field">
+            <label class="mb-2 font-medium" htmlFor="organizationname"
+              >Organization Name</label
+            >
+            <input
+              pInputText
+              id="organizationname"
+              type="text"
+              formControlName="organizationName"
+            />
+          </div>
+          <div class="field">
+            <label class="mb-2 font-medium" htmlFor="websiteurl"
+              >Website URL</label
+            >
+            <input
+              pInputText
+              id="websiteurl"
+              type="text"
+              formControlName="organizationWebsite"
+            />
+          </div>
+          <div class="field">
+            <label class="mb-2 font-medium" htmlFor="email"
+              >Organization Email</label
+            >
+            <input
+              pInputText
+              id="email"
+              type="text"
+              formControlName="organizationEmail"
+            />
+          </div>
+          <div class="field">
+            <label class="mb-2 font-medium" htmlFor="phone"
+              >Organization Phone No</label
+            >
+            <input
+              pInputText
+              id="phone"
+              type="text"
+              formControlName="organizationPhone"
+            />
+          </div>
+          <div class="field">
+            <label class="mb-2 font-medium" htmlFor="activeStatus"
+              >Active Status</label
+            >
+            <div class="field-radiobutton">
+              <p-radioButton
+                [value]="true"
+                formControlName="isActive"
+                id="active"
+              >
+              </p-radioButton>
+              <label for="active">Active</label>
+            </div>
+            <div class="field-radiobutton">
+              <p-radioButton
+                [value]="false"
+                id="deactivate"
+                formControlName="isActive"
+              ></p-radioButton>
+              <label for="deactivate">De-Activate</label>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button
+      [disabled]="!addNewOrganizationForm.valid"
+      pButton
+      (click)="saveOrganizationForm()"
+      label="Save"
+      class="p-button-primary mr-0"
+    ></button>
+  </ng-template>
+</p-dialog>
+
+<p-toast></p-toast>

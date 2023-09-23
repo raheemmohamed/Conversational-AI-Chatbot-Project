@@ -1,0 +1,10 @@
+:host ::ng-deep {
+  .p-dialog .p-dialog-content {
+    padding-bottom: 0;
+  }
+  .p-fileupload-row {
+    button.p-element.p-button.p-component.p-button-icon-only {
+      width: 3rem;
+    }
+  }
+}

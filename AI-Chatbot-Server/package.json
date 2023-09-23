@@ -1,0 +1,25 @@
+{
+  "name": "ai-support-chatbot-server",
+  "version": "1.0.0",
+  "description": "Ai Support chatbot server",
+  "main": "server.js",
+  "scripts": {
+    "start:watch": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "author": "Raheem",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.1362.0",
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
+    "mongoose": "^7.0.4",
+    "openai": "^3.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

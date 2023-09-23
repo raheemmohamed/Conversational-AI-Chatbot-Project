@@ -1,0 +1,41 @@
+/*
+Media Query Manager
+0-600 Phone
+600-900 Tablet Portrait
+900 - 1200 Tablet Landscape
+[1200 - 1800] Normal Style applied
+1800+ - Big screen
+1 em = 16px by default;
+
+$breakpoint argument expecting
+- phone
+- tablet-portrait
+- tablet-landscape
+- big-desktop
+*/
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == big-desktop {
+    @media (min-width: 1800px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tablet-landscape {
+    @media (max-width: 1200px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tablet-portrait {
+    @media (max-width: 900px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == phone {
+    @media (max-width: 600px) {
+      @content;
+    }
+  }
+}

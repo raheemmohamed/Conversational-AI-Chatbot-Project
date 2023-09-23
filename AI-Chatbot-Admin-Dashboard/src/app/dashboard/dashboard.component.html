@@ -1,0 +1,202 @@
+<div class="grid">
+  <div class="col-12 lg:col-6 xl:col-3">
+    <div class="card mb-0">
+      <div class="flex justify-content-between mb-3">
+        <div>
+          <span class="block text-500 font-medium mb-3">Organizations</span>
+          <div class="text-900 font-medium text-xl">
+            {{ organizations.length || 0 }}
+          </div>
+        </div>
+        <div
+          class="flex align-items-center justify-content-center bg-primary-100 border-round"
+          [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+        >
+          <i class="pi pi-building text-primary-500 text-xl"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 lg:col-6 xl:col-3">
+    <div class="card mb-0">
+      <div class="flex justify-content-between mb-3">
+        <div>
+          <span class="block text-500 font-medium mb-3">Trains Bots</span>
+          <div class="text-900 font-medium text-xl">
+            {{ trainedModelsList.length || 0 }}
+          </div>
+        </div>
+        <div
+          class="flex align-items-center justify-content-center bg-primary-100 border-round"
+          [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
+        >
+          <i class="pi pi-discord text-primary-500 text-xl"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <div class="card">
+      <div class="flex justify-content-between align-items-center mb-5">
+        <div>
+          <h3 class="m-0">Trained Models</h3>
+        </div>
+        <button
+          (click)="display = true"
+          pButton
+          pRipple
+          type="button"
+          label="Add New Model"
+          class="p-button-raised"
+        ></button>
+      </div>
+      <div class="mb-5">
+        <p-table
+          [value]="trainedModelsList"
+          scrollDirection="both"
+          [scrollable]="true"
+          scrollHeight="400px"
+          styleClass="mt-3"
+          responsiveLayout="scroll"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th style="width: 200px" pFrozenColumn>Company Name</th>
+              <th style="width: 200px">Id</th>
+
+              <th style="width: 200px">Created At</th>
+              <th style="width: 100px">Status</th>
+              <th style="width: 200px">Knowledge Source</th>
+              <th style="width: 200px">Embedded Source</th>
+              <th style="width: 200px">API</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-trainModel>
+            <tr>
+              <td
+                style="width: 200px"
+                pFrozenColumn
+                class="font-bold"
+                pFrozenColumn
+              >
+                {{ trainModel.organizationName }}
+              </td>
+              <td style="width: 200px" alignFrozen="left">
+                {{ trainModel.organizationId | truncate : 15 }}
+                <span
+                  class="ml-3 cursor-pointer"
+                  (click)="copyToClipboard(trainModel.organizationId)"
+                >
+                  <i class="pi pi-copy"></i>
+                </span>
+              </td>
+
+              <td style="width: 200px">{{ trainModel.createdAt }}</td>
+
+              <td style="width: 100px">
+                <ng-container *ngIf="!trainModel.isDisabled; else showDisbaled">
+                  <p-tag severity="success" value="Active"></p-tag>
+                </ng-container>
+
+                <ng-template #showDisbaled>
+                  <p-tag severity="danger" value="Deactivated"></p-tag>
+                </ng-template>
+              </td>
+              <td style="width: 200px">
+                {{ trainModel.uploadKnowledgeTxt | truncate : 20 }}
+                <span
+                  class="ml-3 cursor-pointer"
+                  (click)="copyToClipboard(trainModel.uploadKnowledgeTxt)"
+                >
+                  <i class="pi pi-copy"></i>
+                </span>
+              </td>
+              <td style="width: 200px">
+                {{ trainModel.embeddedKnowlegeTxt | truncate : 20 }}
+                <span
+                  class="ml-3 cursor-pointer"
+                  (click)="copyToClipboard(trainModel.embeddedKnowlegeTxt)"
+                >
+                  <i class="pi pi-copy"></i>
+                </span>
+              </td>
+              <td style="width: 200px" [title]="trainModel.apiKey">
+                {{ trainModel.apiKey | truncate : 10 }}
+                <span
+                  class="ml-3 cursor-pointer"
+                  (click)="copyToClipboard(trainModel.apiKey)"
+                >
+                  <i class="pi pi-copy"></i>
+                </span>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add New Model-->
+<p-dialog
+  header="Add New Model"
+  [(visible)]="display"
+  [modal]="true"
+  showEffect="fade"
+  [style]="{ width: '40vw' }"
+  [breakpoints]="{ '960px': '75vw' }"
+  styleClass="pb-0"
+>
+  <div class="grid">
+    <div class="col-12 md:col-12">
+      <form [formGroup]="AddNewModelForm" (ngSubmit)="saveForm()">
+        <div class="p-fluid">
+          <div class="field">
+            <label class="mb-2 font-medium">Select Organization</label>
+            <p-autoComplete
+              [suggestions]="filteredOrganizations"
+              (completeMethod)="filterOrganization($event)"
+              field="organizationName"
+              [dropdown]="true"
+              formControlName="organization"
+            >
+            </p-autoComplete>
+          </div>
+          <div class="field">
+            <label class="mb-2 font-medium">Upload .txt file</label>
+            <p-fileUpload
+              #fileUpload
+              name="file"
+              [multiple]="false"
+              accept=".txt"
+              [maxFileSize]="1000000"
+              [customUpload]="true"
+              (uploadHandler)="onUpload($event)"
+              (onSelect)="fileOnSelect($event)"
+            >
+              <!-- <ng-template pTemplate="content" let-file>
+                <ul *ngIf="uploadedFiles.length">
+                  <li *ngFor="let file of uploadedFiles">
+                    {{ file.name }} - {{ file.size }} bytes
+                  </li>
+                </ul>
+              </ng-template> -->
+            </p-fileUpload>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button
+      [disabled]="!AddNewModelForm.valid"
+      pButton
+      (click)="saveForm()"
+      label="Save"
+      class="p-button-primary mr-0"
+    ></button>
+  </ng-template>
+</p-dialog>
+
+<p-toast></p-toast>

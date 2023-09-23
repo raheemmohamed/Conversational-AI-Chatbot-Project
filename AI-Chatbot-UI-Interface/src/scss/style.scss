@@ -1,0 +1,262 @@
+@import "./variables.scss";
+@import "./abstracts/mixins";
+@import "./components/typing-ball";
+
+html,
+body {
+  //   overflow: hidden;
+  box-sizing: border-box;
+}
+
+#chat-bot {
+}
+
+@mixin topBorderRadius {
+  border-top-right-radius: 1rem;
+  border-top-left-radius: 1rem;
+}
+
+@mixin bottomBorderRadius {
+  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+.chatbot {
+  &-container {
+    font-family: "Open Sans", sans-serif !important;
+    width: 400px;
+    max-height: 80vh;
+    background-color: $color-grey-300;
+    position: fixed !important;
+    bottom: 1rem;
+    right: 1rem;
+    color: $color-black;
+    position: fixed;
+    z-index: 99999 !important;
+    border-bottom-right-radius: 3rem !important;
+    border-bottom-left-radius: 3rem !important;
+
+    @include topBorderRadius;
+
+    -webkit-box-shadow: 0px 0px 30px -11px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 30px -11px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 30px -11px rgba(0, 0, 0, 0.75);
+
+    @include respond(phone) {
+      width: 20rem;
+    }
+  }
+
+  &-online-status {
+    background: $color-green;
+    width: 0.8rem;
+    position: absolute;
+    z-index: 11111;
+    height: 0.8rem;
+    border-radius: 5rem;
+    right: 0;
+  }
+
+  &-header {
+    background: $color-grey-700;
+    padding: 0.3rem 1rem;
+    color: $color-white;
+    @include topBorderRadius;
+
+    &--logo {
+      width: 12%;
+      border: 5px solid #7d4af5;
+      padding: 0.5rem;
+      border-radius: 9rem;
+      background: white;
+      margin-right: 0.6rem;
+      position: relative;
+      width: 4.2rem !important;
+    }
+
+    &--logo-small {
+      width: 1.2rem;
+      border: none;
+      padding: 0;
+    }
+
+    &--text {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+  }
+
+  // Flexbox specific to Chatbot
+  &-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  &-column {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &-align-item-center {
+    align-items: center;
+  }
+  &-align-item-start {
+    align-items: flex-start;
+  }
+
+  &-justify-content-end {
+    justify-content: end;
+  }
+
+  &-input {
+    padding: 1rem;
+    font-size: 1rem;
+    border: 0px;
+    border-radius: 4px;
+    box-shadow: none;
+    transition: border-color 0.2s ease-in-out;
+    width: 90%;
+    box-sizing: border-box;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &-body-panel {
+    height: 45vh;
+    background-color: $color-white;
+    padding: 1.2rem;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+  }
+
+  &-message-panel {
+    background: $color-grey-100;
+    padding: 0.9rem;
+    border-radius: 0.4rem;
+  }
+
+  &-text-area {
+    position: relative;
+    background-color: $color-white;
+    -webkit-box-shadow: 0px 0px 4px 0px rgba(133, 133, 133, 1);
+    -moz-box-shadow: 0px 0px 4px 0px rgba(133, 133, 133, 1);
+    box-shadow: 0px 0px 4px 0px rgba(133, 133, 133, 1);
+  }
+
+  &-text-send {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    transform: translate(50%, -50%);
+    right: 1.7rem;
+  }
+
+  &-margin {
+    &-bottom {
+      margin-bottom: 1rem;
+    }
+
+    &-right {
+      margin-right: 1rem;
+    }
+
+    &-right-small {
+      margin-right: 0.3rem;
+    }
+
+    &-0 {
+      margin: 0;
+    }
+    &-left {
+      &-auto {
+        margin-left: auto;
+      }
+    }
+  }
+
+  &-footer {
+    text-align: center;
+    font-weight: 500;
+    background: #343434;
+    color: $color-white;
+    box-shadow: 0px 0px 4px 0px #858585;
+    padding: 0.6rem;
+    @include bottomBorderRadius;
+  }
+
+  &-main-btn {
+    width: 2.5rem;
+    position: fixed;
+    right: 3rem;
+    z-index: 1;
+
+    width: 4.2rem !important;
+    bottom: 7rem !important;
+
+    @include respond(phone) {
+      width: 2rem;
+      right: 1rem;
+      bottom: 7rem !important;
+    }
+  }
+
+  &-paragraph {
+    line-height: 1.3rem;
+  }
+
+  &-notification {
+    &-count {
+      padding: 0.9rem;
+      background-color: $color-red;
+      position: absolute;
+      border-radius: 1rem;
+      top: -0.7rem;
+      left: -0.2rem;
+
+      &::after {
+        content: "1";
+        position: absolute;
+        color: $color-white;
+        text-align: center;
+        padding: 0.1rem;
+        font-weight: 600;
+        font-size: 1rem;
+        top: 50%;
+        right: 50%;
+        -webkit-transform: translate(50%, -50%);
+        -ms-transform: translate(50%, -50%);
+        transform: translate(50%, -50%);
+      }
+    }
+  }
+
+  &-suggestion-label {
+    border: 2px solid $color-grey-300;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    width: fit-content;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $color-grey-700;
+      color: $color-white;
+    }
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.display {
+  &-none {
+    display: none !important;
+  }
+  &-block {
+    display: block !important;
+  }
+}
