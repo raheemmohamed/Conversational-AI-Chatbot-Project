@@ -14,7 +14,7 @@ AWS_ACCESS_KEY_ID= // AWS Access Key here
 AWS_ACCESS_SECRET= // AWS Access Secret here
 DATABASE=mongodb+srv://username:<PASSWORD>@ai-chatbot-cluster.ansz0ec.mongodb.net/ai-chatbot?retryWrites=true
 DATABASE_PASSWORD= // Mongodb password
-CRYPTO_SECRET="ai-chatbot-secret-2269"
+CRYPTO_SECRET="ai-chatbot-secret"
 ```
 
 **4: Do run `npm run-script start:watch`**
