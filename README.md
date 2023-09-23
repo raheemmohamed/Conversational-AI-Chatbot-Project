@@ -3,9 +3,13 @@
 This is a full AI conversational Chatbot project developed using varienty of technologies and services `Angular 14`, `NodeJS`, `ExpressJS` `MongoDB`, `AWS S3 Bucket` and `OpenAI`
 
 **1: Angular admin dashboard**
+
 **2: NodeJS expres backend**
+
 **3: MongoDB database**
+
 **4: AWS S3 storage bucket**
+
 **5: OpenAI**
 
 This repository includes `Admin Dashboard`, `NodejS Backend` and `Multi purpose AI Chatbot UI`. This is a completed project that you can clone and up and run very easily.
