@@ -14,7 +14,7 @@ This repository includes `Admin Dashboard`, `NodejS Backend` and `Multi purpose 
 
 This is Admin Dashboard developed on top of Angular framework. Using this dashboard you can able to add new organizations, and train a openAI embedded model based on giving file context etc.
 
-![Ai Chatbot Admin Dashboard Image 1](https://github.com/raheemmohamed/Conversational-AI-Chatbot-Project/AI-Chatbot-Admin-Dashboard/src/assets/dashboard-images/image1.png)
+![Ai Chatbot Admin Dashboard Image 1](https://raw.githubusercontent.com/raheemmohamed/Conversational-AI-Chatbot-Project/master/AI-Chatbot-Admin-Dashboard/src/assets/dashboard-images/image1.png)
 
 ## NodeJS Backend
 

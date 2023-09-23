@@ -2,9 +2,9 @@
 
 This is Admin Dashboard developed on top of Angular framework. Using this dashboard you can able to add new organizations, and train the openAI embedded model based on the file context etc.
 
-![Ai Chatbot Admin Dashboard Image 1](https://github.com/raheemmohamed/Conversational-AI-Chatbot-Project/src/assets/dashboard-images/image1.png)
+![Ai Chatbot Admin Dashboard Image 1](https://raw.githubusercontent.com/raheemmohamed/Conversational-AI-Chatbot-Project/master/AI-Chatbot-Admin-Dashboard/src/assets/dashboard-images/image1.png)
 
-![Ai Chatbot Admin Dashboard Image 2](https://github.com/raheemmohamed/Conversational-AI-Chatbot-Project/src/assets/dashboard-images/image2.png)
+![Ai Chatbot Admin Dashboard Image 2](https://raw.githubusercontent.com/raheemmohamed/Conversational-AI-Chatbot-Project/master/AI-Chatbot-Admin-Dashboard/src/assets/dashboard-images/image2.png)
 
 ## Development server
 
